@@ -1,16 +1,38 @@
-#bibliotecas
-import sqlite3 
+#bibliotecas de banco
+import sqlite3
+#biblioteca de interface 
 from tkinter import*
 from tkinter import ttk
 #bibliotecas para gerar arquvo pdf das fichas
-from reportlab import canvas
-from reportlab import letter,A4
-from reportlab import TTFont
-from reportlab import pdfmetrics
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import letter,A4
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.pdfbase import pdfmetrics
+from reportlab.platypus import SimpleDocTemplate, Image
+#módulo para chamar brower
+import webbrowser
 
 
 #cria a janela
 janela = Tk()
+#gerar relatorios
+class Relatorio():
+     def relatorioaluno(self):
+         webbrowser.open('Aluno.pdf')
+     def gerarealotioaluno(self):
+         self.c = canvas.CANVAS("Aluno.pdf")
+         self.raRel =self.ra_entrada.get()
+         self.nomeRel =self.nome_entrada.get()
+         self.cursoRel =self.curso_entrada.get()
+         self.emailRel=self.email_entrada.get()      
+         
+         self.c.setFont("Helvetica-Bold",24)
+         self.c.drawString(200,790,'Ficha do aluno')
+         
+         self.c.showPage()
+         self.c.save()
+         self.relatorioaluno()
+
 #inserindo funçôes para os botões
 class Funcoes_dos_bot():    
     def limpar_tela_bt(self):
