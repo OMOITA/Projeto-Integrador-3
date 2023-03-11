@@ -134,7 +134,7 @@ class APlicacaoCadastro(Funcoes_dos_bot):
         
         self.frame_2 = Frame(self.janela,bd= 4,bg='#F5FFFA',highlightbackground='#FFFACD',highlightthickness= 3)
         self.frame_2.place(relx=0.02,rely=0.5, relheight=0.46,relwidth=0.96)
-    #criação dos botoões do frame
+    #criação dos botões do frame
     def _botton_da_tela_frame_01(self):
         #LIMPAR
         self.bt_limpar= Button(self.frame_1,text='LIMPAR', bd= 2, font=('verdana',8,"bold"),command= self.limpar_tela_bt)
@@ -145,7 +145,7 @@ class APlicacaoCadastro(Funcoes_dos_bot):
         #ALTERAR
         self.bt_alterar= Button(self.frame_1,text='ALTERAR', command=self.alterar_cad)
         self.bt_alterar.place(relx=0.6,rely=0.1,relwidth=0.1,relheight=0.15)
-        #LIMPAR
+        #NOVO
         self.bt_novo = Button(self.frame_1,text='NOVO',command= self.adicionar_aluno)
         self.bt_novo.place(relx=0.7,rely=0.1,relwidth=0.1,relheight=0.15)
         #APAGAR
