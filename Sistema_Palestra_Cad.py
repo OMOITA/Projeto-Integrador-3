@@ -2,6 +2,13 @@
 import sqlite3 
 from tkinter import*
 from tkinter import ttk
+#bibliotecas para gerar arquvo pdf das fichas
+from reportlab import canvas
+from reportlab import letter,A4
+from reportlab import TTFont
+from reportlab import pdfmetrics
+
+
 #cria a janela
 janela = Tk()
 #inserindo funçôes para os botões
