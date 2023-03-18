@@ -20,7 +20,7 @@ janela = Tk()
 
 class Relatorio():
      def relatorioaluno(self):
-         webbrowser.open('Aluno.pdf')
+         webbrowser.open("Aluno.pdf")
 
      def gerarealotioaluno(self):
          self.c = canvas.CANVAS("Aluno.pdf")
@@ -71,7 +71,7 @@ class Funcoes_dos_bot():
         print('Banco de dados criado!')
         self.desconectar_banco()
         print('Banco de dados desconectado!')
-    # agilzar o uso das das dunções
+    # agilzar o uso das das funções
 
     def agi_variavel_(self):
         # self.cod = self.cod_entrada.get()
@@ -152,7 +152,7 @@ class Funcoes_dos_bot():
             self.desconectar_banco()
 
 
-class APlicacaoCadastro(Funcoes_dos_bot):
+class APlicacaoCadastro(Funcoes_dos_bot,Relatorio):
     # função para chamar os demais componentes
     def __init__(self):
         self.janela = janela
@@ -234,7 +234,7 @@ class APlicacaoCadastro(Funcoes_dos_bot):
         self.curso_entrada = Entry(self.frame_1)
         self.curso_entrada.place(relx=0.04, rely=0.75, relwidth=0.4)
 
-        # Telefone
+        # e-mail
         self.lb_email = Label(self.frame_1, text='E-mail', bg='#F5FFFA')
         self.lb_email.place(relx=0.5, rely=0.6)
 
