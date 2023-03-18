@@ -11,7 +11,8 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus import SimpleDocTemplate, Image
 # módulo para chamar brower
 import webbrowser
-
+#gerandoe gerenciando um executavél
+import base64
 
 # cria a janela
 janela = Tk()
@@ -21,7 +22,7 @@ janela = Tk()
 class Relatorio():
     def relatorioaluno(self):
         webbrowser.open("Aluno.pdf")
-
+   
     def gerarealotioaluno(self):
         self.c = canvas.Canvas("Aluno.pdf")
         self.raRel = self.ra_entrada.get()
@@ -158,12 +159,14 @@ class Funcoes_dos_bot():
             self.lista_Aluno_Cads.insert("", END, values=i)
         self.limpar_tela_bt()
         self.desconectar_banco()
-
+    #def imagem(self):
+     #   self.bt_novo_imagem='' #inserindo imagem em base 64
 
 class APlicacaoCadastro(Funcoes_dos_bot, Relatorio):
     # função para chamar os demais componentes
     def __init__(self):
         self.janela = janela
+      #  self.bt_novo_imagem()
         self._tela_()
         self._frame_da_tela()
         self._botton_da_tela_frame_01()
@@ -211,6 +214,8 @@ class APlicacaoCadastro(Funcoes_dos_bot, Relatorio):
             self.frame_1, text='ALTERAR', command=self.alterar_cad)
         self.bt_alterar.place(relx=0.6, rely=0.1, relwidth=0.1, relheight=0.15)
         # NOVO
+    
+        
         self.bt_novo = Button(self.frame_1, text='NOVO',
                               command=self.adicionar_aluno)
         self.bt_novo.place(relx=0.7, rely=0.1, relwidth=0.1, relheight=0.15)
