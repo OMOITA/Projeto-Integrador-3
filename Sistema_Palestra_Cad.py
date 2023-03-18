@@ -2,7 +2,8 @@
 import sqlite3
 # biblioteca de interface
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk,tix
+#from tkinter import tix  # balões de mensagem
 # bibliotecas para gerar arquvo pdf das fichas
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter, A4
@@ -11,18 +12,17 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.platypus import SimpleDocTemplate, Image
 # módulo para chamar brower
 import webbrowser
-#gerandoe gerenciando um executavél
-import base64
+
 
 # cria a janela
-janela = Tk()
+janela = tix.Tk()
 
 
 # gerar relatorios
 class Relatorio():
     def relatorioaluno(self):
         webbrowser.open("Aluno.pdf")
-   
+
     def gerarealotioaluno(self):
         self.c = canvas.Canvas("Aluno.pdf")
         self.raRel = self.ra_entrada.get()
@@ -38,8 +38,8 @@ class Relatorio():
         self.c.drawString(50, 670, 'NOME: '+self.nomeRel)
         self.c.drawString(50, 630, 'CURSO: '+self.cursoRel)
         self.c.drawString(50, 600, 'E-mail: '+self.emailRel)
-        
-        self.c.rect(20,720,550,700, fill=False, stroke=True)
+
+        self.c.rect(20, 720, 550, 700, fill=False, stroke=True)
 
         self.c.showPage()
         self.c.save()
@@ -159,8 +159,9 @@ class Funcoes_dos_bot():
             self.lista_Aluno_Cads.insert("", END, values=i)
         self.limpar_tela_bt()
         self.desconectar_banco()
-    #def imagem(self):
+    # def imagem(self):
      #   self.bt_novo_imagem='' #inserindo imagem em base 64
+
 
 class APlicacaoCadastro(Funcoes_dos_bot, Relatorio):
     # função para chamar os demais componentes
@@ -213,9 +214,14 @@ class APlicacaoCadastro(Funcoes_dos_bot, Relatorio):
         self.bt_alterar = Button(
             self.frame_1, text='ALTERAR', command=self.alterar_cad)
         self.bt_alterar.place(relx=0.6, rely=0.1, relwidth=0.1, relheight=0.15)
+
+        text_balao_alterar = "altere a informação do aluno no banco"
+        self.balao_alterar = tix.Balloon(self._botton_da_tela_frame_01)
+        self.balao_alterar.bind_widget(
+            self.bt_alterar, balloonmsg=text_balao_alterar)
+
         # NOVO
-    
-        
+
         self.bt_novo = Button(self.frame_1, text='NOVO',
                               command=self.adicionar_aluno)
         self.bt_novo.place(relx=0.7, rely=0.1, relwidth=0.1, relheight=0.15)
