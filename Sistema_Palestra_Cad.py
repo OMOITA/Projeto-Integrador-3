@@ -23,7 +23,7 @@ class Relatorio():
          webbrowser.open("Aluno.pdf")
 
      def gerarealotioaluno(self):
-         self.c = canvas.CANVAS("Aluno.pdf")
+         self.c = canvas.Canvas("Aluno.pdf")
          self.raRel = self.ra_entrada.get()
          self.nomeRel = self.nome_entrada.get()
          self.cursoRel = self.curso_entrada.get()
