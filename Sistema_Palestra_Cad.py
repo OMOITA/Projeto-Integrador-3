@@ -19,22 +19,28 @@ janela = Tk()
 
 
 class Relatorio():
-     def relatorioaluno(self):
-         webbrowser.open("Aluno.pdf")
+    def relatorioaluno(self):
+        webbrowser.open("Aluno.pdf")
 
-     def gerarealotioaluno(self):
-         self.c = canvas.Canvas("Aluno.pdf")
-         self.raRel = self.ra_entrada.get()
-         self.nomeRel = self.nome_entrada.get()
-         self.cursoRel = self.curso_entrada.get()
-         self.emailRel = self.email_entrada.get()
+    def gerarealotioaluno(self):
+        self.c = canvas.Canvas("Aluno.pdf")
+        self.raRel = self.ra_entrada.get()
+        self.nomeRel = self.nome_entrada.get()
+        self.cursoRel = self.curso_entrada.get()
+        self.emailRel = self.email_entrada.get()
 
-         self.c.setFont("Helvetica-Bold", 24)
-         self.c.drawString(200, 790, 'Ficha do aluno')
+        self.c.setFont("Helvetica-Bold", 24)
+        self.c.drawString(200, 790, 'Ficha do aluno')
 
-         self.c.showPage()
-         self.c.save()
-         self.relatorioaluno()
+        self.c.setFont("Helvetica-Bold", 18)
+        self.c.drawString(50, 700, 'RA: '+self.raRel)
+        self.c.drawString(50, 670, 'NOME: '+self.nomeRel)
+        self.c.drawString(50, 630, 'CURSO: '+self.cursoRel)
+        self.c.drawString(50, 600, 'E-mail: '+self.emailRel)
+
+        self.c.showPage()
+        self.c.save()
+        self.relatorioaluno()
 
 # inserindo funçôes para os botões
 
@@ -103,16 +109,16 @@ class Funcoes_dos_bot():
         self.desconectar_banco()
 
     def duploclique_apagar(self, event):
-            self.limpar_tela_bt()
-            self.lista_Aluno_Cads.selection()
+        self.limpar_tela_bt()
+        self.lista_Aluno_Cads.selection()
 
-            for n in self.lista_Aluno_Cads.selection():
-                col1, col2, col3, col4 = self.lista_Aluno_Cads.item(
-                    n, 'values')
-                self.ra_entrada.insert(END, col1)
-                self.nome_entrada.insert(END, col2)
-                self.curso_entrada.insert(END, col3)
-                self.email_entrada.insert(END, col4)
+        for n in self.lista_Aluno_Cads.selection():
+            col1, col2, col3, col4 = self.lista_Aluno_Cads.item(
+                n, 'values')
+            self.ra_entrada.insert(END, col1)
+            self.nome_entrada.insert(END, col2)
+            self.curso_entrada.insert(END, col3)
+            self.email_entrada.insert(END, col4)
 
     def apagar_cad(self):
         self.agi_variavel_()
@@ -136,23 +142,23 @@ class Funcoes_dos_bot():
         self.limpar_tela_bt()
 
     def buscar_aluno(self):
-            self.conecta_banco_de_dados()
+        self.conecta_banco_de_dados()
 
-            self.lista_Aluno_Cads.delete(*self.lista_Aluno_Cads.get_children())
+        self.lista_Aluno_Cads.delete(*self.lista_Aluno_Cads.get_children())
 
-            self.nome_entrada.insert(END, '%')
-            nome = self.nome_entrada.get()
-            self.cursor.execute(
-                                """SELECT RA,Nome,curso,email FROM Palestra
+        self.nome_entrada.insert(END, '%')
+        nome = self.nome_entrada.get()
+        self.cursor.execute(
+            """SELECT RA,Nome,curso,email FROM Palestra
                                 WHERE Nome LIKE '%s' ORDER BY Nome ASC""" % nome)
-            buscanomeAlu = self.cursor.fetchall()
-            for i in buscanomeAlu:
-                self.lista_Aluno_Cads.insert("", END, values=i)
-            self.limpar_tela_bt()
-            self.desconectar_banco()
+        buscanomeAlu = self.cursor.fetchall()
+        for i in buscanomeAlu:
+            self.lista_Aluno_Cads.insert("", END, values=i)
+        self.limpar_tela_bt()
+        self.desconectar_banco()
 
 
-class APlicacaoCadastro(Funcoes_dos_bot,Relatorio):
+class APlicacaoCadastro(Funcoes_dos_bot, Relatorio):
     # função para chamar os demais componentes
     def __init__(self):
         self.janela = janela
@@ -270,18 +276,18 @@ class APlicacaoCadastro(Funcoes_dos_bot,Relatorio):
     # barra de menu superior
 
     def _menus(self):
-       menu_barra = Menu(self.janela)
-       self.janela.config(menu=menu_barra)
-       filemenu = Menu(menu_barra)
-       filemenu2 = Menu(menu_barra)
-       # filemenu2 =Menu(menu_barra)
-       def _sair(): self.janela.destroy()
-       menu_barra.add_cascade(label="Sair", menu=filemenu)
-       menu_barra.add_cascade(label="Relatórios", menu=filemenu2)
-       
-       filemenu.add_command(label="Sair", command=_sair)
-       filemenu2.add_command(label="Ficha do ALuno",command=self.gerarealotioaluno)    
+        menu_barra = Menu(self.janela)
+        self.janela.config(menu=menu_barra)
+        filemenu = Menu(menu_barra)
+        filemenu2 = Menu(menu_barra)
+        # filemenu2 =Menu(menu_barra)
+        def _sair(): self.janela.destroy()
+        menu_barra.add_cascade(label="Sair", menu=filemenu)
+        menu_barra.add_cascade(label="Relatórios", menu=filemenu2)
 
-       
-                 
+        filemenu.add_command(label="Sair", command=_sair)
+        filemenu2.add_command(label="Ficha do ALuno",
+                              command=self.gerarealotioaluno)
+
+
 APlicacaoCadastro()
