@@ -15,9 +15,9 @@ import webbrowser
 
 # cria a janela
 janela = Tk()
+
+
 # gerar relatorios
-
-
 class Relatorio():
     def relatorioaluno(self):
         webbrowser.open("Aluno.pdf")
@@ -37,6 +37,8 @@ class Relatorio():
         self.c.drawString(50, 670, 'NOME: '+self.nomeRel)
         self.c.drawString(50, 630, 'CURSO: '+self.cursoRel)
         self.c.drawString(50, 600, 'E-mail: '+self.emailRel)
+        
+        self.c.rect(20,720,550,700, fill=False, stroke=True)
 
         self.c.showPage()
         self.c.save()
