@@ -2,8 +2,9 @@
 import sqlite3
 # biblioteca de interface
 from tkinter import *
-from tkinter import ttk,tix
-#from tkinter import tix  # balões de mensagem
+from tkinter import ttk
+from tkinter.constants import *
+from tkinter import tix  # balões de mensagem
 # bibliotecas para gerar arquvo pdf das fichas
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter, A4
@@ -214,11 +215,6 @@ class APlicacaoCadastro(Funcoes_dos_bot, Relatorio):
         self.bt_alterar = Button(
             self.frame_1, text='ALTERAR', command=self.alterar_cad)
         self.bt_alterar.place(relx=0.6, rely=0.1, relwidth=0.1, relheight=0.15)
-
-        text_balao_alterar = "altere a informação do aluno no banco"
-        self.balao_alterar = tix.Balloon(self._botton_da_tela_frame_01)
-        self.balao_alterar.bind_widget(
-            self.bt_alterar, balloonmsg=text_balao_alterar)
 
         # NOVO
 
